@@ -1,17 +1,17 @@
-# git clone
+git clone
 
-# 配置虚拟主机
+配置虚拟主机
 
-# cnpm install
+cnpm install
 
-# composer install
+composer install
 
-# cp .env.example  .env
+cp .env.example  .env
 
-# php artisan key:generate
+php artisan key:generate
 
-# 修改数据库连接
+修改数据库连接
 
-# npm run watch
+npm run watch
 
-# 访问 http://上面配置的虚拟主机 /wx#/  看是否成功
+访问 http://上面配置的虚拟主机 /wx#/  看是否成功
