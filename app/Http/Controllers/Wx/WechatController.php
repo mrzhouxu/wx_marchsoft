@@ -24,6 +24,7 @@ class WechatController extends Controller
             if ($message->MsgType == 'event') {
                 if ($message->Event == 'subscribe') {
                     //TODO 关注
+                    Log::info('zhouxuguanzhu');
                     return $wxServer->subscribe();
                 } else if ($message->Event == 'unsubscribe') {
                     //TODO 取消关注
@@ -132,6 +133,7 @@ class WxServer
     //关注
     public function subscribe()
     {
+        Log::info('zhouxu');
         $openid = $this->message->FromUserName;
         //获取用户信息
         $userService = $this->wechat->user;
