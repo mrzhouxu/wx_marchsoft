@@ -368,7 +368,7 @@ class Weixin
      */
     public static function get_menu()
     {
-//        try {
+        try {
             $app = app("wechat");
             $menu = $app->menu;
             $menus = $menu->current();
@@ -380,10 +380,10 @@ class Weixin
             array("id" => 2,"name" => "微官网2", "sub_button" => array("list" => array(array("id" => 4,"type" => "view", "name" => "微百科2", "url" => "http://www.baidu.com/")))),
             );*/
             return $menus_arr;
-//        } catch (\Exception $e) {
-//            Log::info($e);
-//            return [];
-//        }
+        } catch (\Exception $e) {
+            Log::info($e);
+            return [];
+        }
     }
 
     /**
