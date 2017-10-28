@@ -8,7 +8,7 @@ export default new VueRouter({
         {
             name: "首页",
             path: '/',
-            component: resolve =>void(require(['../components/admin/Admintest.vue'], resolve))
+            component: resolve =>void(require(['../components/admin/layout/index.vue'], resolve))
         }
     ]
 })
