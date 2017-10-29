@@ -206,8 +206,8 @@ class WxServer
     public function click()
     {
         //TODO 暂时不处理点击事件
-//        return $this->help();
-        return 'click';
+        return $this->help();
+//        return 'click';
     }
 
     //关键字匹配
@@ -242,6 +242,6 @@ class WxServer
     public function help()
     {
         //TODO
-        return 'help';
+        return 'click';
     }
 }
