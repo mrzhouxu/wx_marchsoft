@@ -24,9 +24,6 @@ class WechatController extends Controller
             if ($message->MsgType == 'event') {
                 if ($message->Event == 'subscribe') {
                     //TODO 关注
-                    Log::info('click.');
-                    $wxServer->click();
-                    
                     return $wxServer->subscribe();
                 } else if ($message->Event == 'unsubscribe') {
                     //TODO 取消关注
@@ -34,8 +31,7 @@ class WechatController extends Controller
                 }
 
                 // {"ToUserName":"gh_9f675e9c1f81","FromUserName":"ofeo0szCbJLREJi4KrMP1BeQbtMo","CreateTime":"1459931042","MsgType":"event","Event":"CLICK","EventKey":"event_msg_1"}
-                else if ($message->Event == 'CLICK') {
-                    Log::info('click.');
+                if ($message->Event == 'CLICK') {
                     return $wxServer->click();
                 }
 
