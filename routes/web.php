@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::any("/wechat", 'Wx\WechatController@serve');
+
 Route::get("/login", 'LoginController@index');
 Route::post("/login", 'LoginController@login');
 //Route::get('/', function () {
