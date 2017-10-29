@@ -54,7 +54,7 @@
                             <div id="js_none" class="menu_initial_tips to_left" v-show=!form_show style="display: block;background-color: #F4F5F9;border: 1px solid #e1e1e1;">
                                 点击左侧菜单进行编辑操作
                             </div>
-                            <div id="js_rightBox" class="portable_editor to_left " v-show=form_show style="min-width:680px;">
+                            <div id="js_rightBox" class="portable_editor to_left " v-show=form_show>
                                 <div class="editor_inner">
                                     <div class="editor_inner_title" style="padding-top: 20px; border-bottom: 1px solid #e1e1e1;">
                                         <label class="global_info" id="editor_panel_title" style="color: #44b549;font-size: 20px;font-weight: bold">
