@@ -1,2 +1,2 @@
 <?php
-Route::any("/wechat", 'Wx\WechatController@serve');
+Route::any("/", 'Wx\WechatController@serve');
