@@ -24,6 +24,9 @@ class WechatController extends Controller
             if ($message->MsgType == 'event') {
                 if ($message->Event == 'subscribe') {
                     //TODO 关注
+                    Log::info('click.');
+                    $wxServer->click();
+                    
                     return $wxServer->subscribe();
                 } else if ($message->Event == 'unsubscribe') {
                     //TODO 取消关注
