@@ -32,9 +32,9 @@ class WechatController extends Controller
                 }
 
                 // {"ToUserName":"gh_9f675e9c1f81","FromUserName":"ofeo0szCbJLREJi4KrMP1BeQbtMo","CreateTime":"1459931042","MsgType":"event","Event":"CLICK","EventKey":"event_msg_1"}
-//                if ($message->Event == 'CLICK') {
-//                    return $wxServer->click();
-//                }
+                if ($message->Event == 'CLICK') {
+                    return $wxServer->click();
+                }
 
             } else if ($message->MsgType == 'text') {
                 return $wxServer->keyword();
@@ -206,8 +206,8 @@ class WxServer
     public function click()
     {
         //TODO 暂时不处理点击事件
-        return $this->help();
-//        return 'click';
+//        return $this->help();
+        return 'click';
     }
 
     //关键字匹配
