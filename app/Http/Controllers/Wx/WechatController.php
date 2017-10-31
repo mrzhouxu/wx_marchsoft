@@ -28,15 +28,16 @@ class WechatController extends Controller
                 } else if ($message->Event == 'unsubscribe') {
                     //TODO 取消关注
                     return $wxServer->unsubscribe();
-                }
-
-                // {"ToUserName":"gh_9f675e9c1f81","FromUserName":"ofeo0szCbJLREJi4KrMP1BeQbtMo","CreateTime":"1459931042","MsgType":"event","Event":"CLICK","EventKey":"event_msg_1"}
-                else if ($message->Event == 'CLICK') {
+                } else if ($message->Event == 'CLICK') {
                     return "12312312312312312312";
                     return $wxServer->click();
                 }
 
+                // {"ToUserName":"gh_9f675e9c1f81","FromUserName":"ofeo0szCbJLREJi4KrMP1BeQbtMo","CreateTime":"1459931042","MsgType":"event","Event":"CLICK","EventKey":"event_msg_1"}
+
+
             } else if ($message->MsgType == 'text') {
+                return new Text(['content'=>"测试new Text"]);
                 return $wxServer->keyword();
             }
 
