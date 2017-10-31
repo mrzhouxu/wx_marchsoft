@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Wx;
 
-use EasyWeChat\Foundation\Application;
 use App\Http\Controllers\Controller;
 use App\Models\Wx\WxAutoreply;
 use Log;
@@ -38,7 +37,6 @@ class WechatController extends Controller
 
 
             } else if ($message->MsgType == 'text') {
-                return new Text(['content'=>'测试new Text']);
                 return $wxServer->keyword();
             }
 
