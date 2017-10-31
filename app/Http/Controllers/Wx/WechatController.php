@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Wx;
 
+use EasyWeChat\Foundation\Application;
 use App\Http\Controllers\Controller;
 use App\Models\Wx\WxAutoreply;
 use Log;
