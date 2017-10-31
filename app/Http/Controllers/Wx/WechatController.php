@@ -31,7 +31,8 @@ class WechatController extends Controller
                 }
 
                 // {"ToUserName":"gh_9f675e9c1f81","FromUserName":"ofeo0szCbJLREJi4KrMP1BeQbtMo","CreateTime":"1459931042","MsgType":"event","Event":"CLICK","EventKey":"event_msg_1"}
-                if ($message->Event == 'CLICK') {
+                else if ($message->Event == 'CLICK') {
+                    return "12312312312312312312";
                     return $wxServer->click();
                 }
 
