@@ -37,7 +37,7 @@ class WechatController extends Controller
 
 
             } else if ($message->MsgType == 'text') {
-                return new Text(['content'=>"测试new Text"]);
+                return new Text(['content'=>'测试new Text']);
                 return $wxServer->keyword();
             }
 
