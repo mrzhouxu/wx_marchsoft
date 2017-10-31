@@ -36,10 +36,6 @@ class WechatController extends Controller
                 }
 
             } else if ($message->MsgType == 'text') {
-                if ($message->Content == "招生") {
-                    //return Redis::get('address_' . $message->FromUserName);
-                    return "123123";
-                }
                 return $wxServer->keyword();
             }
 
