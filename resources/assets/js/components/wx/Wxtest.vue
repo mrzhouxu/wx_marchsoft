@@ -36,6 +36,14 @@
                 .catch((err)=>{
                     console.log(err)
                 })
+
+            axios.get('/wx/test')
+                .then((res)=>{
+                    console.log(res)
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
         }
     }
 </script>
