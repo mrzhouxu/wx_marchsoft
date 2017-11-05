@@ -14,15 +14,38 @@ class Template extends Model
     static public function index(){ }
 
     static public function test(){
+        //87ps5pzIifU-IdJDVdG-GWTBhgqwGz0Wyk51KSGAAlo
+
         /*$media_id_img = self::upload_img("/img/1-96.jpg")->media_id;
         var_dump($media_id_img);
         $media_id_article =  self::upload_article('title' , $media_id_img , '$content' , 'www.baidu.com' , '$digest' )->media_id;
         return self::send_all_article($media_id_article);*/
-
+//        return self::get_sucai_list();
+//        return self::send_preview("87ps5pzIifU-IdJDVdG-GShiZka0gx8WemYMvYkxmFA");
 
 
 //        return self::upload_article('title' , $media_id , '$content' , 'www.baidu.com' , '$digest' );
 //        return self::send_news ('测试','测试一下','www.baidu.com',$media_id_img,'oefvgwGWrvWNEihktyC4OMLgkNZI');
+    }
+
+    /*
+     * 获取永久素材列表
+     * */
+    static public function get_sucai_list(){
+        $app = app('wechat');
+        $material = $app->material;
+        return $material->lists("news");
+    }
+
+    /*
+     * 发送预览图文消息
+     * */
+    static public function send_preview($media_id){
+        $app = app('wechat');
+        $broadcast = $app->broadcast;
+        $result = $broadcast->previewNews($media_id, "oefvgwGWrvWNEihktyC4OMLgkNZI");
+        return $result;
+
     }
 
     /**上传永久素材图片
