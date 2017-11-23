@@ -1,3 +1,3 @@
 <?php
 //测试专用
-Route::get('/test', 'IndexController@test');
+Route::any('/test', 'Wx\IndexController@test');
