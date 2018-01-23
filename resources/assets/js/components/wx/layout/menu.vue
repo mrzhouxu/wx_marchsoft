@@ -6,13 +6,16 @@
                 </tab-item>
             </tab>
 
-            <swiper height="500px" :show-dots="false">
+            <swiper height="545px" :show-dots="false" v-model="index">
                 <swiper-item v-model="form">
                     <group>
                         <x-input title="姓名" v-model="form.name" name="userName" placeholder="请输入姓名" is-type="china-name"></x-input>
                     </group>
                     <group>
                         <x-input title="班级" v-model="form.grade" name="userClass" placeholder="请输入班级"></x-input>
+                    </group>
+                    <group class="sex2">
+                        <selector direction="right" v-model="form.sex" title="性别" :options="list2"></selector>
                     </group>
                     <group>
                         <x-input title="学号" v-model="form.student_id" name="userNumber" placeholder="请输入学号"></x-input>
@@ -21,36 +24,58 @@
                         <x-input title="手机号码" v-model="form.phone_num" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"></x-input>
                     </group>
                     <group>
-                        <x-input title="发送验证码" class="weui-vcode">
+                        <x-input title="验证码" class="weui-vcode" placeholder="请输入验证码">
                             <x-button class="sice" slot="right" type="primary" mini>发送验证码</x-button>
                         </x-input>
                     </group>
-                    <checker v-model="form.radio" default-item-class="demo2-item" selected-item-class="demo2-item-selected">
-                        <checker-item value="1">开发</checker-item>
-                        <checker-item value="2">美工</checker-item>
+                    <checker v-model="form.radio" default-item-class="demo2-item" selected-item-class="demo2-item-selected" class="direction">
+                        <checker-item value="开发" class="select">开发</checker-item>
+                        <checker-item value="美工" class="select">美工</checker-item>
                     </checker>
-                    <!-- <check-icon class="i_style" :value.sync="demo1">开发</check-icon>
-                    <check-icon class="i_style" :value.sync="demo2">美工</check-icon> -->
 
                     <div style="padding:15px;" class="join">
                         <x-button class="sign_name" type="primary" @click.native="onSubmit"> 报名</x-button>
-                    </div>
+                    </div>                        
+
 
                 </swiper-item>
 
-                <swiper-item>
-                    <!-- <x-input title="美食" v-model="value"></x-input> -->
+                <swiper-item class="message"  v-model="form">
                     <search
                     @on-change="getResult"
-                    :results="results"
                     v-model="value"
-                    ref="search"></search>
-                    <!-- <div style="padding:15px;">
-                        <x-button @click.native="setFocus" type="primary">set focus</x-button>
-                    </div> -->
-                    <!-- <group>
-                        <cell title="static position demo" is-link link="/component/search-static"></cell>
-                    </group> -->
+                    ref="search"
+                    @click="onSearchClick(0)"
+                    placeholder="输入学号查询"
+                    :auto-fixed="autoFixed"></search>
+                    
+                    <div v-if="show_meg" >
+                        <group>
+                            <x-input title='姓名:' :readonly="forbid" v-model="student.name"></x-input>
+                        </group>
+                        <group>
+                            <x-input title='班级:' :readonly="forbid" v-model="student.grade"></x-input>
+                        </group>
+                        <group class="sex">
+                            <selector title="性别:" :readonly="forbid" :options="['男','女']" v-model="student.sex"></selector>
+                        </group>
+                        <group>
+                            <x-input title='学号:' :readonly="forbid0" v-model="student.student_id"></x-input>
+                        </group>
+                        <group>
+                            <x-input title='手机号:' :readonly="forbid" v-model="student.phone_num"></x-input>
+                        </group>
+                        <group>
+                            <x-input title='方向:' :readonly="forbid" v-model="student.radio"></x-input>
+                        </group>
+                        <group class="join" style="margin:0 15px;" v-if="ok">
+                            <x-button class="sign_name" type="primary" @click.native="changeMessage">我要修改</x-button>
+                        </group>
+                        <group class="join" style="margin:0 15px;" v-else>
+                            <x-button class="sign_name" type="primary" @click.native="revise">保存修改</x-button>
+                        </group>
+                    </div>
+
                 </swiper-item>
             </swiper>
         </div>
@@ -59,160 +84,18 @@
 
 </template>
 
-<script>
-    import { Tab, TabItem, Swiper, SwiperItem,XInput,Group,CheckIcon,XButton,Cell,Search,Checker,CheckerItem } from 'vux'
-    export default{
-        components:{
-            Tab,
-            TabItem,
-            Swiper,
-            SwiperItem,
-            XInput,
-            Group,
-            CheckIcon,
-            XButton,
-            Cell,
-            Search,
-            Checker,
-            CheckerItem
-        },
-        data(){
-            return {
-                commonList: [ '开发', '美工'],
-                list:  ['我要报名', '报名信息'],         
-                index: 0,
-                demo2: '我要报名',
-                demo1: false,
-                demo2: true,
-                results: [],
-                value: '20161514325',
-
-                form: {
-                    name:       '',
-                    grade:      '',
-                    student_id: '',
-                    phone_num:  '',
-                    radio:      '1',
-                    code:       '',
-                },
-                time: 0,
-                disabled: false
-            }
-        },
-        methods: {
-            change (val, label) {
-              console.log('change', val, label)
-            },
-            selectFirst () {
-              this.checklist001 = ['China']
-            },
-            selectFirstTwo () {
-              this.checklist001 = ['China', 'Japan']
-            },
-            selectLeft () {
-              const left = _.without.apply(_, [this.commonList].concat(this.checklist001))
-              this.checklist001 = left
-            },
-            getResult (val) {
-              console.log('on-change', val)
-              this.results = val ? getResult(this.value) : []
-            },
-
-            remove_spaces(){
-                this.form.name        = this.form.name.trim();
-                this.form.grade       = this.form.grade.trim();
-                this.form.student_id  = this.form.student_id.trim();
-                this.form.phone_num   = this.form.phone_num.trim();
-                this.form.code        = this.form.code.trim();
-            },
-            test(){
-                var reg_name    = /^[\u4E00-\u9FA5]{2,4}$/;
-                var reg_id      = /^20\d{8,9}$/;
-                var reg_mobile  = /^1[3|5|7|8]\d{9}$/;
-                var reg_phone    = /^0\d{2,3}-?\d{7,8}$/;
-
-                if(!(reg_name.test(this.form.name))){
-                    this.$message({
-                        showClose: true,
-                        message: '姓名错误，请重新填写',
-                        type: 'warning'
-                    });
-                }else if(this.form.grade.length < 5 || this.form.grade.length > 10){
-                    this.$message({
-                        showClose: true,
-                        message: '班级错误，请重新填写',
-                        type: 'warning'
-                    });
-                }else if(!reg_id.test(this.form.student_id)){
-                    this.$message({
-                        showClose: true,
-                        message: '学号错误，请重新填写',
-                        type: 'warning'
-                    });
-                }else if(!reg_mobile.test(this.form.phone_num) && !reg_phone.test(this.form.phone_num)){
-                    this.$message({
-                        showClose: true,
-                        message: '电话号码错误，请重新填写',
-                        type: 'warning'
-                    });
-                }else if(this.form.code.length !== 6){
-                    this.$message({
-                        showClose: true,
-                        message: '验证码错误',
-                        type: 'warning'
-                    });
-                }else {
-                    return true;
-                }
-                return false;
-            },
-            onSubmit() {
-                this.remove_spaces();
-                if(this.test()){
-                    console.log('asdfasd')
-                    // this.$http.post('/sign',{
-                    //     name       : this.form.name,
-                    //     grade      : this.form.grade,
-                    //     student_id : this.form.student_id,
-                    //     phone_num  : this.form.phone_num,
-                    //     radio      : this.form.radio,
-                    //     code       : this.form.radio,
-                    // }).then(
-                    //     function (response) {
-                    //         var data = response.data;
-                    //         if(data.code == 0){
-                    //             this.$message({
-                    //                 showClose: true,
-                    //                 message: data.msg,
-                    //                 type: 'success'
-                    //             });
-                    //         } else {
-                    //             this.$message({
-                    //                 showClose: true,
-                    //                 message: data.msg,
-                    //                 type: 'error'
-                    //             });
-                    //         }
-                    //     }
-                    // )
-                }
-            }
-        },
-    }
-
-    function getResult (val) {
-      let rs = []
-      for (let i = 0; i < 20; i++) {
-        rs.push({
-          title: `${val} result: ${i + 1} `,
-          other: i
-        })
-      }
-      return rs
-    }
-</script>
 
 <style>
+    .sex2 .weui-label{
+        width: 50px;
+    }
+    .sex .weui-label{
+        width: 3.5em;
+    }
+    .sex .weui-cell__ft{
+        text-align: left !important;
+        color: #000;
+    }
     .demo2-item {
       width: 40px;
       height: 40px;
@@ -224,10 +107,6 @@
     }
     .demo2-item-selected {
       border-color: green;
-    }
-    .weui-cells{
-        border: 1px solid #d7e7f3 !important;
-        border-radius: 5px;
     }
    .i_style i:before{
         color: rgb(22,25,94) !important;
@@ -256,12 +135,6 @@
     .vux-tab{
         height: 49px;
     }
-    .vux-tab-item{
-        line-height: 49px !important;
-    }
-    .vux-slider{
-        padding: 10px 30px !important;
-    }
     .join{
         color: #ffffff;
         text-align: center;
@@ -277,8 +150,264 @@
     .sice,.sice:hover{
         background-color:rgb(22,25,94);
     }
+    .join button:active {
+        background-color: rgb(22,25,94);
+    }
     .weui-search-bar__box{
         padding-top: 4px;
     }
-
+    .direction{
+        text-align: center;
+    }
+    .select{
+        margin:20px 30px 0;
+    }
+    .demo2-item-selected{
+        border-color: rgb(22,25,94);
+    }
+    .message>.vux-x-input{
+        border: none;
+    }
+    .message>.vux-no-group-title{
+        border: none !important;
+    }
 </style>
+
+<script>
+    import { Tab, TabItem, Swiper, Selector, SwiperItem,XInput,Group,CheckIcon,XButton,Cell,Search,Checker,CheckerItem } from 'vux'
+    export default{
+        components:{
+            Tab,
+            TabItem,
+            Swiper,
+            SwiperItem,
+            XInput,
+            Group,
+            CheckIcon,
+            XButton,
+            Cell,
+            Search,
+            Checker,
+            CheckerItem,
+            Selector,
+        },
+        data(){
+            return {
+                commonList: [ '开发', '美工'],
+                list:  ['我要报名', '报名信息'], 
+                list2: [{key: '男', value: '男'}, {key: '女', value: '女'}],        
+                index: 0,
+                demo2: '我要报名',
+                demo1: false,
+                demo2: true,
+                autoFixed: false,
+                results: [],
+                value: '',
+
+                student: {
+                    name        : '李红斌',
+                    grade       : '计科163',
+                    sex         : '男',
+                    phone_num   : '18303612353',
+                    student_id  : '20161514325',
+                    radio       : '开发',
+                    create_time : 0,
+                },
+
+                form: {
+                    name:       '',
+                    grade:      '',
+                    sex:        '男',
+                    student_id: '',
+                    phone_num:  '',
+                    radio:      '美工',
+                    code:       '',
+                },
+                time: 0,
+                forbid0: true,
+                forbid: true,
+                forbid2: false,
+                ok: true,
+                show_meg: true,
+            }
+        },
+        methods: {
+            changeMessage(){
+                this.forbid = false;
+                this.ok = false;
+            },
+            getResult (val) {
+              if(val.length>=11){
+                this.onSearchClick (val);
+              }else{
+                this.show_meg = false;
+              }
+            },
+
+            remove_spaces(mate){
+                mate.name        = mate.name.trim();
+                mate.grade       = mate.grade.trim();
+                
+                mate.sex       = mate.sex.trim();
+                mate.student_id  = mate.student_id.trim();
+                mate.phone_num   = mate.phone_num.trim();
+            },
+            test(mate){
+                var reg_name    = /^[\u4E00-\u9FA5]{2,4}$/;
+                var reg_id      = /^20\d{8,9}$/;
+                var reg_mobile  = /^1[3|5|7|8]\d{9}$/;
+                var reg_phone    = /^0\d{2,3}-?\d{7,8}$/;
+
+                if(!(reg_name.test(mate.name))){
+                    console.log(mate.name)
+                    this.$message({
+                        showClose: true,
+                        message: '姓名错误，请重新填写',
+                        type: 'warning'
+                    });
+                }else if(mate.grade.length < 5 || mate.grade.length > 10){
+                    this.$message({
+                        showClose: true,
+                        message: '班级错误，请重新填写',
+                        type: 'warning'
+                    });
+                }else if(!reg_id.test(mate.student_id)){
+                    this.$message({
+                        showClose: true,
+                        message: '学号错误，请重新填写',
+                        type: 'warning'
+                    });
+                }else if(!reg_mobile.test(mate.phone_num) && !reg_phone.test(mate.phone_num)){
+                    this.$message({
+                        showClose: true,
+                        message: '电话号码错误，请重新填写',
+                        type: 'warning'
+                    });
+                // }else if(mate.code.length !== 6){
+                //     this.$message({
+                //         showClose: true,
+                //         message: '验证码错误',
+                //         type: 'warning'
+                //     });
+                }else {
+                    return true;
+                }
+                return false;
+            },
+            te(key){
+                var reg_id = /^20\d{8,9}$/;
+                if(!reg_id.test(key)){
+                    this.$message({
+                        showClose: true,
+                        message: '学号错误，请重新填写',
+                        type: 'warning'
+                    });
+                }else {
+                    return true;
+                }
+                return false;
+            },
+            onSearchClick (val) {
+                var student_id  = val.trim();
+                let obj2 = this;
+                if(this.te(student_id)){
+
+                    axios.post("wx/search", {
+                            student_id : student_id,
+                        }).then(function (response) {
+                            var data = response.data;
+                            if(data.code == 0){
+                                obj2.show_meg = true;
+                                obj2.student.name       = data.msg.name;
+                                obj2.student.grade      = data.msg.class;
+                                obj2.student.sex        = data.msg.sex;
+                                obj2.student.student_id = data.msg.student_id;
+                                obj2.student.phone_num  = data.msg.phone;
+                                obj2.student.radio      = data.msg.dretion.toString();
+                                // this.reset_direction();
+                                // this.student.create_time= data.msg.create_time;
+                            } else {
+                                obj2.$message({
+                                    showClose: true,
+                                    message: data.msg,
+                                    type: 'error'
+                                });
+                            }
+                        })                    
+                }
+            },
+            onSubmit() {
+                var mate = this.form;
+                let obj3 = this;
+                this.remove_spaces(mate);
+                if(this.test(mate)){
+
+                axios.post("wx/sign", {
+                        name       : this.form.name,
+                        grade      : this.form.grade,
+                        sex        : this.form.sex,
+                        student_id : this.form.student_id,
+                        phone_num  : this.form.phone_num,
+                        radio      : this.form.radio,
+                        code       : this.form.code,
+                    }).then(function (response) {
+                        var data = response.data;
+                            if(data.code == 0){
+                                obj3.$message({
+                                    showClose: true,
+                                    message: data.msg,
+                                    type: 'success',
+                                    forbid: true,
+                                    ok: true,
+                                });
+                            } else {
+                                obj3.$message({
+                                    showClose: true,
+                                    message: data.msg,
+                                    type: 'error'
+                                });
+                            }
+                });
+
+                }
+
+            },
+            revise(){
+                var re_mate = this.student;
+                this.remove_spaces(re_mate);
+                let obj = this;
+                if(this.test(re_mate)){
+
+                axios.post("wx/reset", {
+                        name       : re_mate.name,
+                        grade      : re_mate.grade,
+                        sex        : re_mate.sex,
+                        student_id : re_mate.student_id,
+                        phone_num  : re_mate.phone_num,
+                        radio      : re_mate.radio,
+
+                    }).then(function (response) {
+                        var data = response.data;
+                            if(data.code == 0){
+                                obj.$message({
+                                    showClose: true,
+                                    message: data.msg,
+                                    type: 'success',
+                                    forbid: true,
+                                    ok: true,
+                                });
+                                obj.forbid = true;
+                                obj.ok = true;
+                            } else {
+                                obj.$message({
+                                    showClose: true,
+                                    message: data.msg,
+                                    type: 'error'
+                                });
+                            }
+                });
+                }
+            }
+        },
+    }
+</script>
