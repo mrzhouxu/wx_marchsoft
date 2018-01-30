@@ -30,6 +30,16 @@ export default new VueRouter({
             path: '/wx/menu',
             component: resolve =>void(require(['../components/admin/wx/menu.vue'], resolve))
         },
+        {
+            name: "发布算法",
+            path: '/6',
+            component: resolve =>void(require(['../components/admin/weeklyExercise/PublishingAlgorithm.vue'], resolve))
+        },
+        {
+            name: "算法列表",
+            path: '/5',
+            component: resolve =>void(require(['../components/admin/weeklyExercise/AlgorithmList.vue'], resolve))
+        },
     ]
 })
 
