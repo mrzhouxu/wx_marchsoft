@@ -208,7 +208,7 @@
 	      	updateAlgorithm:function(){
 	      		if(confirm("你修改了内容，确定要更改吗？")){
 	      			if(this.type2=="")
-			            this.type2="空";
+			            this.type2="无";
 		          	if(this.title=="")
 			            alert("标题不能为空");
 		          	else if(this.editor.txt.text()=="")

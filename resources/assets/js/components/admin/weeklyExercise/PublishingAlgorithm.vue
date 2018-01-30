@@ -45,7 +45,7 @@ import E from 'wangeditor'
       methods: {
         getContent: function () {
           if(this.keyword=="")
-            this.keyword="空";
+            this.keyword="无";
           if(this.title=="")
             alert("标题不能为空");
           else if(this.editor.txt.text()=="")
@@ -90,6 +90,7 @@ import E from 'wangeditor'
             'table',  // 表格
             'code',  // 插入代码
           ]
+          editor.customConfig.uploadImgShowBase64 = true;
           editor.create();
           return editor;
         }

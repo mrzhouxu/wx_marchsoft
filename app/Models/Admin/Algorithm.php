@@ -13,7 +13,7 @@ class Algorithm extends Model
     }
 
     public static function select_algorithms($first,$tail){
-        $algorithmslist = DB::table('daypractice')->offset($first)->limit($tail)->get();
+        $algorithmslist = DB::table('daypractice')->orderBy('time', 'desc')->offset($first)->limit($tail)->get();
         return $algorithmslist;
     }
 
