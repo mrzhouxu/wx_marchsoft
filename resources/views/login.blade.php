@@ -171,7 +171,7 @@
 </div>
 
 </body>
-<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js">
+<script src="{{ url('js/jquery.min.js') }}">
 </script>
 <script src="js/particles/particles.min.js"></script>
 <script src="js/particles/app.js"></script>

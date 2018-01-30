@@ -32,12 +32,12 @@ export default new VueRouter({
         },
         {
             name: "发布算法",
-            path: '/6',
+            path: '/addalgorithmslist',
             component: resolve =>void(require(['../components/admin/weeklyExercise/PublishingAlgorithm.vue'], resolve))
         },
         {
             name: "算法列表",
-            path: '/5',
+            path: '/algorithmslist',
             component: resolve =>void(require(['../components/admin/weeklyExercise/AlgorithmList.vue'], resolve))
         },
     ]

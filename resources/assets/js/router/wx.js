@@ -7,16 +7,10 @@ export default new VueRouter({
     routes: [
         {
             name: "首页",
-            path: '/',
-            component: resolve =>void(require(['../components/wx/Wxtest.vue'], resolve))
+            path: '/ss',
+            component: resolve =>void(require(['../components/wx/final.vue'], resolve))
+
         },
-        {
-
-            name: "首页",
-            path: '/tt',
-            component: resolve =>void(require(['../components/wx/TT.vue'], resolve))
-
-        }
     ]
 })
 
