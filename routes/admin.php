@@ -32,5 +32,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/menu/get', 'Admin\WeixinController@get_wx_menu');
         Route::get('/user/menu/get', 'Admin\WeixinController@get_wx_user_mennu');
     });
-
+	Route::group(['prefix' => 'weeklyExercise'], function () {
+        Route::post('/get', 'Admin\algorithm\algorithmController@get_algorithm');
+        Route::post("/delete/{id}", 'Admin\algorithm\algorithmController@delete_algorithm');
+        Route::post("/update", 'Admin\algorithm\algorithmController@update_algorithm');
+        Route::post("/add", 'Admin\algorithm\algorithmController@add_algorithm');
+        Route::post("/selectsingle/{id}", 'Admin\algorithm\algorithmController@select_algorithm');
+    });
 });
