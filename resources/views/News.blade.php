@@ -3,8 +3,8 @@
 <head>
     {{--微信端--}}
     <meta charset="utf-8">
-    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    {{--<link rel="icon" href="favicon.ico" type="image/x-icon"/>--}}
+    {{--<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>--}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="user-scalable=no,width=device-width, initial-scale=1,maximum-scale=1" name="viewport">
     <meta name="format-detection" content="telephone=no"/>
@@ -15,13 +15,34 @@
     <meta name="x5-fullscreen" content="true">
     <meta name="csrf" content="{{csrf_token()}}">
     <title>这里是标题</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        .weui-panel:before{
+            display: none;
+        }
+        .weui-panel:after{
+            display: none;
+        }
+        .weui-media-box:before{
+            display: none !important;
+        }
+        .weui-media-box__info{
+            border-bottom: 1px solid ;
+            padding-bottom: 15px !important;
+        }
+    </style>
 </head>
-
 <body>
 <div id="app">
 </div>
 <script src="{{ mix('js/manifest.js') }}"></script>
 <script src="{{ mix('js/vendor.js') }}"></script>
-<script src="{{ mix('js/wx.js') }}"></script>
+<script src="{{ mix('js/news.js') }}"></script>
 </body>
 </html>

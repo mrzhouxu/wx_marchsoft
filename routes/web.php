@@ -20,11 +20,26 @@ Route::group(['prefix' => 'wx'], function () {
     Route::get("/", function(){
     	return view('wx');
     });
-    require("wx.php");
+//    Route::get("/tee", function(){
+//        return view('News');
+//    });
+
+//    require("wx.php");
 });
 
+Route::group(['prefix'=>'News'],function(){
+
+    Route::get('/getNew','wx\getNewController@getNews_show');
+    Route::get('/new','wx\getNewController@getNew_show');
+    Route::get('/getNewTime','wx\getNewController@getNewsTime_show');
+});
 
 Route::group(['middleware' => ['login.check']], function () {
     Route::get('/', 'IndexController@index');
     include('admin.php');
+});
+
+Route::group(['prefix'=>'student'],function (){
+    Route::get('/getStudents','userInfoController@getStudents');
+    Route::get('/getStudent','userInfoController@getStudent');
 });

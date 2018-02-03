@@ -34,3 +34,16 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
 });
+
+Route::group(['prefix' => 'News'],function (){
+    Route::get('/getNewItem','Admin\News\NewController@getNewItem');
+    Route::post('/delete','Admin\News\NewController@deleteNews');
+    Route::post('/add','Admin\News\NewController@insertNews');
+    Route::get('/getOneNew','Admin\News\NewController@getOneNew');
+    Route::post('/update','Admin\News\NewController@updateNew');
+});
+
+Route::group(['prefix'=> 'Contact'],function(){
+    Route::get('/getContent','Admin\Contact\ContactController@getContent');
+    Route::post('/updateContent','Admin\Contact\ContactController@updateContent');
+});

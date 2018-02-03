@@ -30,6 +30,21 @@ export default new VueRouter({
             path: '/wx/menu',
             component: resolve =>void(require(['../components/admin/wx/menu.vue'], resolve))
         },
+        {
+            name: '新闻列表',
+                path: '/wx/new',
+            component: resolve =>void(require(['../components/admin/wx/new.vue'], resolve))
+        },
+        {
+            name: '添加新闻',
+                path: '/wx/newsEdit',
+            component: resolve =>void(require(['../components/admin/wx/newsEdit.vue'], resolve))
+        },
+        {
+            name: '联系我们管理',
+                path: '/wx/contact',
+            component: resolve =>void(require(['../components/admin/wx/contact.vue'], resolve))
+        }
     ]
 })
 

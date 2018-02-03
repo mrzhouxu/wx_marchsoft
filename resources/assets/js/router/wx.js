@@ -8,15 +8,34 @@ export default new VueRouter({
         {
             name: "首页",
             path: '/',
-            component: resolve =>void(require(['../components/wx/Wxtest.vue'], resolve))
+            component: resolve => void (require(['../components/wx/Wxtest.vue'], resolve))
         },
         {
 
             name: "首页",
-            path: '/tt',
-            component: resolve =>void(require(['../components/wx/TT.vue'], resolve))
+            path: '/newList/:date',
+            component: resolve => void (require(['../components/wx/news.vue'], resolve))
 
+        },
+        {
+
+            name: "新闻",
+            path: '/newShow/:pid/:date',
+
+            component: resolve => void (require(['../components/wx/new.vue'], resolve))
+
+        }, {
+            name: "学子",
+            path: '/student',
+            component: resolve => void (require(['../components/wx/student.vue'], resolve))
+        },
+         {
+            name: "get学子",
+            path: '/getStudent/:pid',            
+            component: resolve => void (require(['../components/wx/studentDetails.vue'], resolve))
         }
+
+
     ]
 })
 
