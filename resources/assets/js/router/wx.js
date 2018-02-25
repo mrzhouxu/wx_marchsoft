@@ -16,7 +16,20 @@ export default new VueRouter({
             path: '/tt',
             component: resolve =>void(require(['../components/wx/TT.vue'], resolve))
 
+        },
+        {
+            name: "首页",
+            path: '/ss',
+            component: resolve =>void(require(['../components/wx/Complete.vue'], resolve))
+
+        },
+         {
+            name: "首页",
+            path: '/ss',
+            component: resolve =>void(require(['../components/wx/layout/Cultivate.vue'], resolve))
+
         }
+
     ]
 })
 
