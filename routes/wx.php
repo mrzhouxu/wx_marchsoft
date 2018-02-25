@@ -2,9 +2,7 @@
 //测试专用
 Route::any('/test', 'Wx\IndexController@test');
 
-<<<<<<< HEAD
 Route::post('/train', 'Wx\TrainController@sign');
-=======
 Route::post('/sign', 'Wx\WxSignUpController@sign');
 
 Route::post('/search', 'Wx\WxSignUpController@search');
@@ -17,4 +15,3 @@ Route::group(['prefix' => 'algorithm'], function () {
 	Route::post('/selectAllPractice', 'Wx\algorithm\wxAlgorithmController@get_all_algorithms');
 	Route::post('/selectDetailedContent', 'Wx\algorithm\wxAlgorithmController@get_detailed_algorithms');
 });
->>>>>>> b85ea80ca513349da4638d93035a1223de0dbc1e

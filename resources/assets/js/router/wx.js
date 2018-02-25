@@ -5,13 +5,12 @@ Vue.use(VueRouter)
 export default new VueRouter({
     saveScrollPosition: true,
     routes: [
-        {
+         {
             name: "首页",
-            path: '/ss',
-            component: resolve =>void(require(['../components/wx/final.vue'], resolve))
+            path: '/',
+            component: resolve =>void(require(['../components/wx/Wxtest.vue'], resolve))
         },
         {
-<<<<<<< HEAD
 
             name: "首页",
             path: '/tt',
@@ -29,9 +28,9 @@ export default new VueRouter({
             path: '/ss',
             component: resolve =>void(require(['../components/wx/layout/Cultivate.vue'], resolve))
 
-        }
+        },
+        {
 
-=======
             name: "每周一练",
             path: '/algorithms',
             component: resolve =>void(require(['../components/wx/weeklyExercise/algorithm.vue'], resolve))
@@ -46,7 +45,7 @@ export default new VueRouter({
             path: '/detailedAlgorithms/:id',
             component: resolve =>void(require(['../components/wx/weeklyExercise/detailedContent.vue'], resolve))
         },
->>>>>>> b85ea80ca513349da4638d93035a1223de0dbc1e
+
     ]
 })
 
