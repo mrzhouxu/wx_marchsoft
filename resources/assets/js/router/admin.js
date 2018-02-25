@@ -30,6 +30,7 @@ export default new VueRouter({
             path: '/wx/menu',
             component: resolve =>void(require(['../components/admin/wx/menu.vue'], resolve))
         },
+<<<<<<< HEAD
          {
             name: '培训报名',
             path: '/15',
@@ -46,6 +47,18 @@ export default new VueRouter({
             component: resolve =>void(require(['../components/admin/layout/modify.vue'], resolve))
         },
 
+=======
+		{
+            name: "发布算法",
+            path: '/addalgorithmslist',
+            component: resolve =>void(require(['../components/admin/weeklyExercise/PublishingAlgorithm.vue'], resolve))
+        },
+        {
+            name: "算法列表",
+            path: '/algorithmslist',
+            component: resolve =>void(require(['../components/admin/weeklyExercise/AlgorithmList.vue'], resolve))
+        },
+>>>>>>> b85ea80ca513349da4638d93035a1223de0dbc1e
     ]
 })
 

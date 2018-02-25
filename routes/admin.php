@@ -1,6 +1,8 @@
 <?php
 
 Route::group(['prefix' => 'admin'], function () {
+
+
     Route::get('/menu/get', 'Admin\MenuController@get_menu');
     Route::group(['prefix' => 'weixin'], function () {
         Route::post("/config/set", 'Admin\WeixinController@set_config');
@@ -33,6 +35,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/user/menu/get', 'Admin\WeixinController@get_wx_user_mennu');
     });
 
+<<<<<<< HEAD
     Route::get('/march/people','Admin\MarchController@get_people');
     Route::post('/delete/{NO}','Admin\MarchController@del_people');
     Route::post('/modify','Admin\MarchController@modify_people');
@@ -46,4 +49,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/train/search','Admin\TrainController@search_people');
     Route::get('/train/export','Admin\TrainController@exopor_excel');
 
+=======
+    Route::group(['prefix' => 'weeklyExercise'], function () {
+
+        Route::post('/get', 'Admin\algorithm\algorithmController@get_algorithm');
+        Route::post("/delete/{id}", 'Admin\algorithm\algorithmController@delete_algorithm');
+        Route::post("/update", 'Admin\algorithm\algorithmController@update_algorithm');
+        Route::post("/add", 'Admin\algorithm\algorithmController@add_algorithm');
+        Route::post("/selectsingle/{id}", 'Admin\algorithm\algorithmController@select_algorithm');
+    });
+>>>>>>> b85ea80ca513349da4638d93035a1223de0dbc1e
 });
+
+
