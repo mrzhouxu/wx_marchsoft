@@ -10,12 +10,12 @@ export default new VueRouter({
             path: '/ss',
             component: resolve =>void(require(['../components/wx/final.vue'], resolve))
         },
-        {
-            name: "首页",
-            path: '/tt',
-            component: resolve =>void(require(['../components/wx/TT.vue'], resolve))
+        // {
+        //     name: "首页",
+        //     path: '/tt',
+        //     component: resolve =>void(require(['../components/wx/TT.vue'], resolve))
 
-        },
+        // },
         {
             name: "课堂",
             path: '/lecture/index',
