@@ -18,9 +18,10 @@ window.Vue = require('vue');
 import Vue from 'vue'
 import App from './Wx.vue'
 import router from './router/wx.js'
+import VueI18n from 'vue-i18n'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
-Vue.use(ElementUI)
+Vue.use(ElementUI,VueI18n)
 import {filters} from './filter'
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])

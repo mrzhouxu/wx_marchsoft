@@ -68,7 +68,6 @@
                 menu: [],
                 current: "",
                 opened: [],
-
                 change: 1,
             }
         },

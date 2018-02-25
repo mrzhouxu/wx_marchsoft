@@ -40,6 +40,16 @@ export default new VueRouter({
             path: '/lecture/newlec',
             component: resolve =>void(require(['../components/admin/lecture/newlec.vue'], resolve))
         },
+		{
+            name: "发布算法",
+            path: '/addalgorithmslist',
+            component: resolve =>void(require(['../components/admin/weeklyExercise/PublishingAlgorithm.vue'], resolve))
+        },
+        {
+            name: "算法列表",
+            path: '/algorithmslist',
+            component: resolve =>void(require(['../components/admin/weeklyExercise/AlgorithmList.vue'], resolve))
+        },
     ]
 })
 

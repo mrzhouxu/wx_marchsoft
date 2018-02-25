@@ -20,7 +20,7 @@ Route::group(['prefix' => 'wx'], function () {
     Route::get("/", function(){
     	return view('wx');
     });
-    require("wx.php");
+    include("wx.php");
 });
 
 
