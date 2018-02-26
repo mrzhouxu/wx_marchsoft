@@ -10,13 +10,11 @@ export default new VueRouter({
             path: '/',
             component: resolve =>void(require(['../components/wx/Wxtest.vue'], resolve))
         },
-        {
-
-            name: "首页",
-            path: '/tt',
-            //component: resolve =>void(require(['../components/wx/TT.vue'], resolve))
-
-        },
+        // {
+        //     name: "首页",
+        //     path: '/tt',
+        //     compoqnent: resolve =>void(require(['../components/wx/TT.vue'], resolve))
+        // },
         {
             name: "首页",
             path: '/ss',
@@ -28,6 +26,22 @@ export default new VueRouter({
             path: '/ss',
             component: resolve =>void(require(['../components/wx/layout/Cultivate.vue'], resolve))
 
+        },
+        // {
+        //     name: "首页",
+        //     path: '/tt',
+        //     component: resolve =>void(require(['../components/wx/TT.vue'], resolve))
+
+        // },
+        {
+            name: "课堂",
+            path: '/lecture/index',
+            component: resolve =>void(require(['../components/wx/lecture/index.vue'], resolve))
+        },
+        {
+            name: "详细视频",
+            path: '/lecture/detaile/:theme/:user/:content/:sort/:data/:file',
+            component: resolve =>void(require(['../components/wx/lecture/detaile.vue'], resolve))
         },
         {
 

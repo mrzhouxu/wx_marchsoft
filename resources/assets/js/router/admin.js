@@ -30,6 +30,17 @@ export default new VueRouter({
             path: '/wx/menu',
             component: resolve =>void(require(['../components/admin/wx/menu.vue'], resolve))
         },
+        {
+            name: '讲课列表',
+            path: '/lecture/backindex',
+            component: resolve =>void(require(['../components/admin/lecture/index.vue'], resolve))
+        },
+        {
+            name: '发布讲课',
+            path: '/lecture/newlec',
+            component: resolve =>void(require(['../components/admin/lecture/newlec.vue'], resolve))
+        },
+
          {
             name: '培训报名',
             path: '/15',
@@ -45,7 +56,6 @@ export default new VueRouter({
             path: '/mod',
             component: resolve =>void(require(['../components/admin/layout/modify.vue'], resolve))
         },
-
 		{
             name: "发布算法",
             path: '/addalgorithmslist',

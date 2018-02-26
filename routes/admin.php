@@ -58,3 +58,21 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 
+Route::group(['prefix' => 'lecture'],function () {
+
+    Route::get('/getlecture','LectureController@get_all_lecture');
+
+    Route::get('/getlecturecount','LectureController@get_count_lecture');
+    Route::get('/getlectuesort','LectureController@get_lecture_sort');
+
+    Route::post('/alterlecture','LectureController@set_lec_message');
+
+    Route::get('/delete','LectureController@delete_lecture');
+
+    Route::get('/getusers','LectureController@get_lecture_user');
+
+    Route::post('/newlecture','LectureController@new_lecture');
+
+});
+
+
