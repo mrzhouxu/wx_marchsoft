@@ -66,6 +66,11 @@ export default new VueRouter({
             path: '/algorithmslist',
             component: resolve =>void(require(['../components/admin/weeklyExercise/AlgorithmList.vue'], resolve))
         },
+        {
+            name:"毕业学子",
+            path: '/userinfo/infoindex',
+            component: resolve =>void(require(['../components/admin/userInfo/index.vue'], resolve))
+        }
     ]
 })
 

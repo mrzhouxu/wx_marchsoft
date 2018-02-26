@@ -27,7 +27,6 @@ class userInfoController extends Controller
                 if($key != 'avator' && $value == null) {
                     $user->$key = '暂无';
                 }
-
             }
         }
 
@@ -37,7 +36,7 @@ class userInfoController extends Controller
 
     public function select_user_number() {
         $user_number = march_user::select_user_number();
-        return $user_number ? responseToJson(0,'',$user_number) :responseToJson(1,'插叙失败');
+        return $user_number ? responseToJson(0,'',$user_number) :　responseToJson(1,'插叙失败');
 
     }
 
@@ -57,16 +56,15 @@ class userInfoController extends Controller
             return responseToJson(1,'请正确填写学生班级');
         }else if(mb_strlen($user_info['department'],'utf-8')<1 || mb_strlen($user_info['department'],'utf-8')>15) {
             return responseToJson(1,'请正确填写所在院系');
-        }else if(mb_strlen($user_info['user_phone'],'utf-8') != 11 || mb_strlen($user_info['user_phone'],'utf-8')<1) {
-            return responseToJson(1,'联系方式格式不正确');
         }else if(mb_strlen($user_info['describe'],'utf-8')<2 || mb_strlen($user_info['describe'],'utf-8')>50) {
             return responseToJson(1,'个人介绍格式错误');
         }
-        if(is_string($user_info['avator'])) {
+
+        if(is_string($user_info['avator']) || $user_info['avator'] == null) {
             // dd($user_info['avator']);
             if(strpos($user_info['avator'],self::$user_img)  !== false) {
                 $user_info['avator'] = substr($user_info['avator'],strpos($user_info['avator'],'_')+1);
-            }else if($user_info['avator'] == 'null') $user_info['avator'] = '';
+            }else if($user_info['avator'] == null) $user_info['avator'] = null;
             else  return responseToJson(1,'文件非法输入!');
             $file = '';
         }else {
@@ -100,13 +98,29 @@ class userInfoController extends Controller
                 $user_info['avator'] = $fileName;
 
                 $update_boo = march_user::update_user_mesg($user_info);
-                dd($update_boo);
+                return $update_boo ? responseToJson(0,'修改成功') :　responseToJson(1,'修改失败');
+                 // dd($update_boo);
             }
         }else {
             $update_boo = march_user::update_user_mesg($user_info);
-            dd($update_boo);
+            return $update_boo ? responseToJson(0,'修改成功') :responseToJson(1,'修改失败');
         }
        
+    }
+
+    public function delete_users_info(Request $request) {
+        if($request->isMethod('post')) {
+            $user_tel_arr = $request->all();
+            if(count($user_tel_arr)<1) return responseToJson(1,'未选中需删除的行!');
+            else if(count($user_tel_arr)==1) {
+
+            }else {
+
+            }
+
+        }
+        
+        
     }
 
     public function getStudents(Request $request){

@@ -44,27 +44,29 @@ class march_user extends Model
 
     public static function update_user_mesg($user_info) {
         // try{
+            // dd($user_info);
             $up_boo = DB::table(self::$user)
             ->leftJoin(self::$user_info,self::$user.'.user_phone','=',self::$user_info.'.user_phone')
-            ->where(self::$user.'.user_phone',$user_info['user_phone'])->get();
-            // ->update([
-            //     self::$user.'.user_phone' => $user_info['user_phone'],
-            //     self::$user_info.'.user_phone' => $user_info['user_phone'],
-            //     self::$user.'.user_name' => $user_info['user_name'],
-            //     self::$user_info.'.user_sex' => $user_info['user_sex'],
-            //     self::$user_info.'.department' => $user_info['department'],
-            //     self::$user_info.'.class' => $user_info['class'],
-            //     self::$user_info.'.avator' => $user_info['avator'],
-            //     self::$user_info.'.describe' => $user_info['describe'],
-            // ]);
-            dd($up_boo);
-            // if($up_boo) {
-            //     return 1;
-            // }else {
+            ->where(self::$user.'.user_phone',$user_info['user_phone'])
+            ->update([
+                self::$user.'.user_phone' => $user_info['user_phone'],
+                self::$user_info.'.user_phone' => $user_info['user_phone'],
+                self::$user.'.user_name' => $user_info['user_name'],
+                self::$user_info.'.user_sex' => $user_info['user_sex'],
+                self::$user_info.'.department' => $user_info['department'],
+                self::$user_info.'.class' => $user_info['class'],
+                self::$user_info.'.avator' => $user_info['avator'],
+                self::$user_info.'.describe' => $user_info['describe'],
+                self::$user_info.'.level' => $user_info['level']
+            ]);
+            // dd($up_boo);
+            if($up_boo) {
+                return 1;
+            }else {
                 
-            //     return 0;
+                return 0;
                 // throw new Exception(0);
-            // }
+            }
         // }
         // catch(Exception $e){
             // return $e->getMessage();

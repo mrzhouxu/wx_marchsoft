@@ -75,4 +75,10 @@ Route::group(['prefix' => 'lecture'],function () {
 
 });
 
+Route::group(['prefix' => 'userinfo'],function () {
+    Route::get('/getuserdata','userInfoController@select_finish_user');
+    Route::get('/getusernum','userInfoController@select_user_number');
 
+    Route::post('/updateuser','userInfoController@update_user_mesg');
+    Route::post('/deleteusers','userInfoController@delete_users_info');
+});
