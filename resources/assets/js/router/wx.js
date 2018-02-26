@@ -14,7 +14,7 @@ export default new VueRouter({
 
             name: "首页",
             path: '/tt',
-            component: resolve =>void(require(['../components/wx/TT.vue'], resolve))
+            //component: resolve =>void(require(['../components/wx/TT.vue'], resolve))
 
         },
         {
