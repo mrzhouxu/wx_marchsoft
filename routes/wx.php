@@ -2,6 +2,7 @@
 //测试专用
 Route::any('/test', 'Wx\IndexController@test');
 
+Route::post('/train', 'Wx\TrainController@sign');
 Route::post('/sign', 'Wx\WxSignUpController@sign');
 
 Route::post('/search', 'Wx\WxSignUpController@search');
