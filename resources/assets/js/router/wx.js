@@ -10,13 +10,13 @@ export default new VueRouter({
             path: '/',
             component: resolve =>void(require(['../components/wx/Wxtest.vue'], resolve))
         },
-        {
+        // {
 
-            name: "首页",
-            path: '/tt',
-            component: resolve =>void(require(['../components/wx/TT.vue'], resolve))
+        //     name: "首页",
+        //     path: '/tt',
+        //     compoqnent: resolve =>void(require(['../components/wx/TT.vue'], resolve))
 
-        },
+        // },
         {
             name: "首页",
             path: '/ss',

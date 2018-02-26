@@ -25,3 +25,5 @@ class Algorithm extends Model
     			->get();
     }
 }
+
+
