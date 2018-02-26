@@ -35,6 +35,18 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/user/menu/get', 'Admin\WeixinController@get_wx_user_mennu');
     });
 
+    Route::get('/march/people','Admin\MarchController@get_people');
+    Route::post('/delete/{NO}','Admin\MarchController@del_people');
+    Route::post('/modify','Admin\MarchController@modify_people');
+    Route::get('/change_page','Admin\MarchController@change_page');
+    Route::post('/search','Admin\MarchController@search_people');
+
+
+    Route::get('/train/people','Admin\TrainController@get_people');
+    Route::post('/del/{NO}','Admin\TrainController@del_people');
+    Route::get('/train/change_page','Admin\TrainController@change_page');
+    Route::post('/train/search','Admin\TrainController@search_people');
+    Route::get('/train/export','Admin\TrainController@exopor_excel');
     Route::group(['prefix' => 'weeklyExercise'], function () {
 
         Route::post('/get', 'Admin\algorithm\algorithmController@get_algorithm');
