@@ -112,17 +112,23 @@ class userInfoController extends Controller
         if($request->isMethod('post')) {
             $user_tel_arr = $request->all();
             if(count($user_tel_arr)<1) return responseToJson(1,'未选中需删除的行!');
-            else if(count($user_tel_arr)==1) {
 
+            $users_avator = march_user::delete_user_msg($user_tel_arr);
+
+            if(count($users_avator)>0) {
+                return responseToJson(0,'删除成功');
             }else {
-
+                return responseToJson(1,'删除失败');
             }
-
         }
-        
-        
     }
 
+    public function new_user_msg(Request $request) {
+        $user_info = $request->all();
+        
+
+    }
+ 
     public function getStudents(Request $request){
 
         $student = march_user::getStudentList($request);

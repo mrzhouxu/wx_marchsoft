@@ -59,20 +59,33 @@ class march_user extends Model
                 self::$user_info.'.describe' => $user_info['describe'],
                 self::$user_info.'.level' => $user_info['level']
             ]);
-            // dd($up_boo);
             if($up_boo) {
                 return 1;
             }else {
-                
                 return 0;
-                // throw new Exception(0);
             }
-        // }
-        // catch(Exception $e){
-            // return $e->getMessage();
-        // }
-        
     }
+
+    public static function delete_user_msg($user_tel_arr) {
+
+        $users_avator = self::select_users_avator($user_tel_arr);
+
+        $del_boo = DB::table(self::$user)->leftJoin(self::$user_info,self::$user.'.user_phone','=',self::$user_info.'.user_phone')
+        ->whereIn(self::$user.'.user_phone',$user_tel_arr)
+        ->get();
+        // ->delete();
+
+        if($del_boo) return $users_avator;
+        else return [];
+    }
+
+    private static function select_users_avator($user_tel_arr) {
+        $users_avator = DB::table(self::$user)->leftJoin(self::$user_info,self::$user.'.user_phone','=',self::$user_info.'.user_phone')
+        ->whereIn(self::$user.'.user_phone',$user_tel_arr)->select('avator')->get();
+
+        return $users_avator;
+    }
+
 
     public static function getStudentList(Request $request){
 

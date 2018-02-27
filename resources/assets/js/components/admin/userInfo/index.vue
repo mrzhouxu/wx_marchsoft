@@ -10,7 +10,7 @@
         </div>
 
         <div>
-            <el-button type="primary">新增学子</el-button>
+            <el-button type="primary" @click="handleAdd()">新增学子</el-button>
             <el-button type="primary" @click="handleDelete(multipleSelection)">删除选中</el-button>
         </div>
 
@@ -270,7 +270,23 @@
                         rows.forEach(function(value,index) {
                         userPhone.push(value.user_phone);
                     });
-                    axios.post('/userinfo/deleteusers',userPhone)
+                    axios.post('/userinfo/deleteusers',userPhone).then(res=>{
+                        if(res.data.code == 0) {
+                            this.$notify({
+                                title: '成功',
+                                message: res.data.msg,
+                                type: 'success',
+                                duration:2000
+                            });
+                        }else {
+                            this.$notify({
+                                title: '失败',
+                                message: res.data.msg,
+                                type: 'error',
+                                duration:2000
+                            });
+                        }
+                    })
                     // this.$message({
                     //     type: 'success',
                     //     message: '删除成功!'
@@ -282,7 +298,11 @@
                     });  
                 })
 
+            },
+            handleAdd() {
+
             }
+
                 
         },
          created() {
