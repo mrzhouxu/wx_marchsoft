@@ -81,4 +81,5 @@ Route::group(['prefix' => 'userinfo'],function () {
 
     Route::post('/updateuser','userInfoController@update_user_mesg');
     Route::post('/deleteusers','userInfoController@delete_users_info');
+    Route::post('/adduser','userInfoController@new_user_msg');
 });

@@ -11,7 +11,7 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta name="full-screen" content="yes">
     <meta name="x5-fullscreen" content="true">
-    <meta name="csrf" content="{{csrf_token()}}">
+    <meta name="csrf" content="{{ csrf_token() }}">
     <title>首页-{{config("app.company_name")}}{{config("app.name")}}</title>
     <link rel="stylesheet" href="{{ url('css/admin.css') }}">
 {{--    <link rel="stylesheet" href="{{ url('element-theme/index.css') }}">--}}
