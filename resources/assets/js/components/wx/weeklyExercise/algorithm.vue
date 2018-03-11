@@ -6,10 +6,9 @@
         </div>
         <group >
             <group-title slot="title">{{newExercises}}<x-button style="float:right;" mini plain  @click.native="HistoryExercises">{{historyAlgorithm}}</x-button></group-title>
-            <cell 
-                primary="content"
-                value-align="left"
-                :value='algorithmtitle'></cell>
+            <cell primary="content" value-align="left">
+              <div v-html="algorithmtitle"></div>
+            </cell>
             <divider>{{ Algorithmtitme}}</divider>
             <cell
               :title="algorithmButton"
@@ -18,8 +17,7 @@
               :arrow-direction="showContent ? 'up' : 'down'"
               @click.native="showContent = !showContent">
             </cell>
-              <div class="slide" :class="showContent?'animate':''">
-                  <pre><code>{{ algorithmAnswer }}</code></pre>
+              <div class="slide" :class="showContent?'animate':''" v-html="algorithmAnswer">
               </div>
         </group>
     </div> 

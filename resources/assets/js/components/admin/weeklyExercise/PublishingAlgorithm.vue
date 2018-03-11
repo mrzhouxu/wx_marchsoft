@@ -14,14 +14,16 @@
 		    <el-form-item label="关键字" > 
 		     	<el-input v-model="keyword"></el-input>
 		    </el-form-item>
-		    <el-form-item label="题目" >
-		        <div id="editorElem">
-			    </div>
-		    </el-form-item>	
-	       	<el-form-item label="代码">
-			    <div id="editorElem2">
-			    </div>
-		    </el-form-item>
+        <el-tooltip class="item" effect="dark" content="Top Left 提示文字" placement="top-start">
+          <el-button>题目</el-button>
+        </el-tooltip>
+　　　　<UE ref="ue"></UE>
+        <br>
+        <el-tooltip class="item" effect="dark" content="Top Left 提示文字" placement="top-start">
+          <el-button>代码</el-button>
+        </el-tooltip>
+        <UE ref="ue2"></UE>
+        <br>
 		    <el-form-item>
 		      <el-button v-on:click="getContent">确认提交</el-button>
 		    </el-form-item>
@@ -30,11 +32,13 @@
 </template>
 
 <script>
+import UE from '../../../utf8-php/UEditor.vue'
 
-import E from 'wangeditor'
 
    export default {
-      name: 'editor',
+      components:{
+        UE
+      },
       data () {
         return {
         	title:'',
@@ -43,21 +47,24 @@ import E from 'wangeditor'
 
       },
       methods: {
+
         getContent: function () {
-          if(this.keyword=="")
-            this.keyword="无";
+          let subject = this.$refs.ue.getUEContent();//在这里调用了子组件ueditor组件的getContent()方法
+          let answer = this.$refs.ue2.getUEContent();
           if(this.title=="")
             alert("标题不能为空");
-          else if(this.editor.txt.text()=="")
+          else if(subject=="")
             alert("题目不能为的空");
-          else if(this.editor2.txt.text()=="")
+          else if(answer=="")
             alert("答案代码不能为空");
           else{
+            if(this.keyword=="")
+            this.keyword="无";
     				axios.post('/admin/weeklyExercise/add',{
     		        title:this.title,
         				keyword:this.keyword,
-                subject:this.editor.txt.text(),
-                answer:this.editor2.txt.text()
+                subject:subject,
+                answer:answer
     				})			
     				.then(function(response){
     					alert(response.data.msg);
@@ -65,40 +72,15 @@ import E from 'wangeditor'
     		        window.location.reload();
     				});
           }
-        },
-        createeditor:function(divname){
-          var self=this;
-          this.dialogVisible = true;
-          var editor = new E(divname);
-            editor.customConfig.onchange = (html) => {
-              this.subject = html
-            };
-            editor.customConfig.menus = [
-              'head',  // 标题
-            'bold',  // 粗体
-            'italic',  // 斜体
-            'underline',  // 下划线
-            'strikeThrough',  // 删除线
-            'foreColor',  // 文字颜色
-            'backColor',  // 背景颜色
-            'link',  // 插入链接
-            'list',  // 列表
-            'justify',  // 对齐方式
-            'quote',  // 引用
-            'emoticon',  // 表情
-            'image',  // 插入图片
-            'table',  // 表格
-            'code',  // 插入代码
-          ]
-          editor.customConfig.uploadImgShowBase64 = true;
-          editor.create();
-          return editor;
         }
       },
       mounted() {
-        this.editor=this.createeditor('#editorElem');
-        this.editor2=this.createeditor('#editorElem2');
+
       }
     }
 </script>
+
+<style>
+
+</style>
 

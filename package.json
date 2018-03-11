@@ -19,7 +19,8 @@
     "vuex": "^2.3.1",
     "vuex-router-sync": "^4.1.2",
     "vux": "2.5.9",
-    "vux-loader": "^1.0.57"
+    "vux-loader": "^1.0.57",
+     "babel-plugin-transform-remove-strict-mode":"0.0.2"
   },
   "dependencies": {
     "element-ui": "^1.4.8",
