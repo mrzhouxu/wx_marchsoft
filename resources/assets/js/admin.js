@@ -62,3 +62,12 @@ Vue.prototype.time_conversion = function(date, pattern) {
     }
     return pattern;
 }
+
+Vue.prototype.reception_prompt = function(message,type='warning',time=1500) {
+    this.$message({
+        showClose: true,
+        message: message,
+        type: type,
+        duration:time
+    });
+}

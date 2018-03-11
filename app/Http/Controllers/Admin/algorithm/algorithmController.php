@@ -46,12 +46,10 @@ class algorithmController extends Controller
     public function delete_algorithm($id){
 
 		  $a=Algorithm::delete_algorithms($id);
-
 		  if($a==1)
     		return responseToJson(0, "删除成功");
     	else
     		return responseToJson(1, "删除失败");
-
     }
 
     public function select_algorithm($id){

@@ -30,6 +30,32 @@ export default new VueRouter({
             path: '/wx/menu',
             component: resolve =>void(require(['../components/admin/wx/menu.vue'], resolve))
         },
+        {
+            name: '讲课列表',
+            path: '/lecture/backindex',
+            component: resolve =>void(require(['../components/admin/lecture/index.vue'], resolve))
+        },
+        {
+            name: '发布讲课',
+            path: '/lecture/newlec',
+            component: resolve =>void(require(['../components/admin/lecture/newlec.vue'], resolve))
+        },
+
+         {
+            name: '培训报名',
+            path: '/15',
+            component: resolve =>void(require(['../components/admin/layout/Train.vue'], resolve))
+        },
+         {
+            name: '三月报名',
+            path: '/14',
+            component: resolve =>void(require(['../components/admin/layout/March.vue'], resolve))
+        },
+         {
+            name: '修改信息',
+            path: '/mod',
+            component: resolve =>void(require(['../components/admin/layout/modify.vue'], resolve))
+        },
 		{
             name: "发布算法",
             path: '/addalgorithmslist',
@@ -40,6 +66,11 @@ export default new VueRouter({
             path: '/algorithmslist',
             component: resolve =>void(require(['../components/admin/weeklyExercise/AlgorithmList.vue'], resolve))
         },
+        {
+            name:"毕业学子",
+            path: '/userinfo/infoindex',
+            component: resolve =>void(require(['../components/admin/userInfo/index.vue'], resolve))
+        }
     ]
 })
 
