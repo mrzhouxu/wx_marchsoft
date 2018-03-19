@@ -44,6 +44,11 @@ export default new VueRouter({
             name: '联系我们管理',
                 path: '/wx/contact',
             component: resolve =>void(require(['../components/admin/wx/contact.vue'], resolve))
+        },
+        {
+            name: '新生路线',
+                path: '/wx/road',
+            component: resolve =>void(require(['../components/admin/wx/roadEdit.vue'], resolve))
         }
     ]
 })

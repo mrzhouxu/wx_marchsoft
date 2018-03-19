@@ -19,21 +19,31 @@ export default new VueRouter({
         },
         {
 
-            name: "新闻",
+            name: "Show",
             path: '/newShow/:pid/:date',
 
             component: resolve => void (require(['../components/wx/new.vue'], resolve))
 
         }, {
-            name: "学子",
+            name: "student",
             path: '/student',
             component: resolve => void (require(['../components/wx/student.vue'], resolve))
         },
          {
-            name: "get学子",
-            path: '/getStudent/:pid',            
+            name: "getStudent",
+            path: '/getStudent/:pid',
             component: resolve => void (require(['../components/wx/studentDetails.vue'], resolve))
+        },
+        {
+            name: "addOUr",
+            path: '/addour',
+            component: resolve => void (require(['../components/wx/addOur.vue'], resolve))
+        },{
+            name:"getRoad",
+                path:'/Road',
+            component:resolve => void (require(['../components/wx/road.vue'], resolve))
         }
+
 
 
     ]

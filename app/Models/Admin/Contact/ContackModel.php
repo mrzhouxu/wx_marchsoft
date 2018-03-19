@@ -30,5 +30,14 @@ class ContackModel extends Model
         return $this->where('idwx_contact',1)->update(['content'=>$request->input('content')]);
     }
 
+    public function getRoad(){
+        return $this->find(2);
+    }
+
+    public function updateRoad(Request $request){
+
+        return $this->where('idwx_contact',2)->update(['content'=>$request->input('content')]);
+    }
+
 
 }

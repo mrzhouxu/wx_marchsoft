@@ -7,7 +7,7 @@
 <script>
     import './ueditor.config.js'
     import './ueditor.all.min.js'
-    import './ueditor.parse.min.js'
+//    import './ueditor.parse.min.js'
     import './lang/zh-cn/zh-cn.js'
 
 

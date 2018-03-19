@@ -47,3 +47,7 @@ Route::group(['prefix'=> 'Contact'],function(){
     Route::get('/getContent','Admin\Contact\ContactController@getContent');
     Route::post('/updateContent','Admin\Contact\ContactController@updateContent');
 });
+Route::group(['prefix'=> 'Road'],function(){
+    Route::get('/getRoad','Admin\Road\roadController@getRoad');
+    Route::post('/updateRoad','Admin\Road\roadController@updateRoad');
+});

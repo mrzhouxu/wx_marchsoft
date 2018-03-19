@@ -46,20 +46,28 @@ class NewController extends Controller
     private function judgeNull(Request $request)
     {
         if ($request->input('news')['title'] == '') {
-            return responseToJson(2, '标题为空', 'no');
+            return 1;
         } elseif ($request->input('news')['content'] == '') {
-            return responseToJson(2, '内容为空', 'no');
+            return 2;
+        } else {
+            return  0;
         }
     }
 
     public function insertNews(Request $request)
     {
-        $this->judgeNull($request);
-        $status = $this->newModel->insertNews($request);
-        if (sizeof($status) == 1) {
-            return responseToJson(0, 'success', 'yes');
-        } else {
-            return responseToJson(1, 'error', 'no');
+        $judge = $this->judgeNull($request);
+        if ($judge == 0) {
+            $status = $this->newModel->insertNews($request);
+            if (sizeof($status) == 1) {
+                return responseToJson(0, 'success', 'yes');
+            } else {
+                return responseToJson(1, 'error', 'no');
+            }
+        }elseif($judge == 1){
+            return responseToJson(2,'error','titleNO');
+        }else{
+            return responseToJson(3,'error','contentNO');
         }
     }
 

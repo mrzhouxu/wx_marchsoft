@@ -73,13 +73,9 @@ class NewModel extends Model
 
     public function updateNews(Request $request){
         $news = $request->input('news');
-        if(!$news['checked']){
-            $status = $this->where('idmarch_news',$news['id'])->update(['news_title'=>$news['title'],'news_content'=>$news['content'],'news_stick'=>0]);
-        }else{
-            $status = $this->where('idmarch_news',$news['id'])->update(['news_title'=>$news['title'],'news_content'=>$news['content']]);
-        }
-        return $status;
-
+        $news_stick = $news['checked'] ? $this->getStick():0;
+        $status = $this->where('idmarch_news',$news['id'])->update(['news_title'=>$news['title'],'news_content'=>$news['content'],'news_stick'=>$news_stick]);
+        return $status; 
     }
 
 
