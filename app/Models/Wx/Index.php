@@ -7,9 +7,10 @@ use DB;
 
 class index extends Model
 {
-    protected $table = 'march_user_info';
-    protected $primaryKey = 'iduser_info';
-    public $timestamps = false;
 
+    
+    static public function index(){
+    	
+    }
 
 }

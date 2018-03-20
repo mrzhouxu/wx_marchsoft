@@ -15,6 +15,7 @@ class LoginController extends Controller
 
     public function index()
     {
+        // dd('aaaa');
         return view("login");
     }
 
@@ -24,7 +25,7 @@ class LoginController extends Controller
             $name = $request->name;//code or mobile
             $pwd = $request->pass;
             $user = Super::get_account($name);
-            if ($user) {
+            if ($user){
 
                 //dd(encrypt_password($pwd, $user->salt));
 
@@ -46,7 +47,6 @@ class LoginController extends Controller
                 Log::error(['LOGIN ERROR' => $name . ' & ' . md5(md5($pwd))]);
                 return Response::json(['status' => 2, 'msg' => '用户名或密码错误,请重新输入']);
             }
-
         } else {
             return view('login');
         }
