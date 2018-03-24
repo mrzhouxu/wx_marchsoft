@@ -98,7 +98,7 @@ class userInfoController extends Controller
                 $user_info['avator'] = $fileName;
 
                 $update_boo = march_user::update_user_mesg($user_info);
-                return $update_boo ? responseToJson(0,'修改成功') :　responseToJson(1,'修改失败');
+                return $update_boo ? responseToJson(0,'修改成功') :responseToJson(1,'修改失败');
                  // dd($update_boo);
             }
         }else {
