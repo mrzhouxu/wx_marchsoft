@@ -1,5 +1,6 @@
 <?php
 //测试专用
+
 Route::any('/test', 'Wx\IndexController@test');
 
 Route::post('/train', 'Wx\TrainController@sign');
@@ -15,3 +16,4 @@ Route::group(['prefix' => 'algorithm'], function () {
 	Route::post('/selectAllPractice', 'Wx\algorithm\wxAlgorithmController@get_all_algorithms');
 	Route::post('/selectDetailedContent', 'Wx\algorithm\wxAlgorithmController@get_detailed_algorithms');
 });
+

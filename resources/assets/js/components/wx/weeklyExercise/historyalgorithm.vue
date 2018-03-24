@@ -1,3 +1,4 @@
+
 <template>
     <div>
         <x-header title="每周一练" ></x-header>
@@ -24,6 +25,17 @@
                 </tr>
               </tbody>
             </x-table>
+                <template>
+                  <div class="block">
+                    <el-pagination
+                      @current-change="handleCurrentChange"
+                      :current-page.sync="currentPage1"
+                      :page-size="pagesNumber"
+                      layout="total, prev, pager, next"
+                      :total.sync="recorNumber">
+                    </el-pagination>
+                  </div>
+                </template>
         </group>
     </div> 
 </template>
@@ -43,11 +55,14 @@
       },
       data(){
           return {
-             img_url : '/img/mzyl.jpg',
-             tk:"题库",
-             algorithmlist:"fdsfs",
-             historyAlgorithm:"返回",
-             items: []
+            img_url : '/img/mzyl.jpg',
+            tk:"题库",
+            algorithmlist:"fdsfs",
+            historyAlgorithm:"返回",
+            items: [],
+            currentPage1: 1,
+            pagesNumber:10,
+            recorNumber:10
           }
       },
       computed: {},
@@ -63,6 +78,9 @@
           },
           returnLayout(){
             this.$router.push("/algorithms");
+          },
+          handleCurrentChange(val) {
+            this.getAlgorithm((val-1)*this.pagesNumber,this.pagesNumber);
           }
       },
       mounted() {

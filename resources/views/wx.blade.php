@@ -16,6 +16,7 @@
     <meta name="csrf" content="{{csrf_token()}}">
     <title>这里是标题</title>
 </head>
+
 <body>
 <div id="app">
 </div>

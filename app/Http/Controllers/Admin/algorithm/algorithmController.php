@@ -44,14 +44,17 @@ class algorithmController extends Controller
     }
 
     public function delete_algorithm($id){
-    		return responseToJson(0, "删除注释掉了");
 
-
+		  $a=Algorithm::delete_algorithms($id);
+		  if($a==1)
+    		return responseToJson(0, "删除成功");
+    	else
+    		return responseToJson(1, "删除失败");
     }
 
     public function select_algorithm($id){
         $information=Algorithm::select_single_information($id);
-        $information[0]->answer=htmlspecialchars($information[0]->answer);
+        // $information[0]->answer=htmlspecialchars($information[0]->answer);
         if($information)
           return responseToJson(1, "请求成功",$information);
         else

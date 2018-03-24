@@ -31,6 +31,28 @@ export default new VueRouter({
             component: resolve =>void(require(['../components/admin/wx/menu.vue'], resolve))
         },
         {
+
+            name: '新闻列表',
+                path: '/wx/new',
+            component: resolve =>void(require(['../components/admin/wx/new.vue'], resolve))
+        },
+        {
+            name: '添加新闻',
+                path: '/wx/newsEdit',
+            component: resolve =>void(require(['../components/admin/wx/newsEdit.vue'], resolve))
+        },
+        {
+            name: '联系我们管理',
+                path: '/wx/contact',
+            component: resolve =>void(require(['../components/admin/wx/contact.vue'], resolve))
+        },
+        {
+            name: '新生路线',
+                path: '/wx/road',
+            component: resolve =>void(require(['../components/admin/wx/roadEdit.vue'], resolve))
+        },
+        {
+
             name: '讲课列表',
             path: '/lecture/backindex',
             component: resolve =>void(require(['../components/admin/lecture/index.vue'], resolve))
@@ -70,6 +92,7 @@ export default new VueRouter({
             name:"毕业学子",
             path: '/userinfo/infoindex',
             component: resolve =>void(require(['../components/admin/userInfo/index.vue'], resolve))
+
         }
     ]
 })

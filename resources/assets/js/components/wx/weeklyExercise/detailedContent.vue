@@ -9,7 +9,9 @@
             <cell 
                 primary="content"
                 value-align="left"
-                :value='algorithmtitle'></cell>
+                >
+                   <div v-html="algorithmtitle"></div>
+                </cell>
             <divider>{{ Algorithmtitme}}</divider>
             <cell
               :title="algorithmButton"
@@ -18,8 +20,7 @@
               :arrow-direction="showContent ? 'up' : 'down'"
               @click.native="showContent = !showContent">
             </cell>
-              <div class="slide" :class="showContent?'animate':''">
-                  <pre><code>{{ algorithmAnswer }}</code></pre>
+              <div class="slide" :class="showContent?'animate':''"  v-html="algorithmAnswer">
               </div>
         </group>
     </div> 

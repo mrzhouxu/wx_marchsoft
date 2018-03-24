@@ -34,13 +34,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/menu/get', 'Admin\WeixinController@get_wx_menu');
         Route::get('/user/menu/get', 'Admin\WeixinController@get_wx_user_mennu');
     });
-
     Route::get('/march/people','Admin\MarchController@get_people');
     Route::post('/delete/{NO}','Admin\MarchController@del_people');
     Route::post('/modify','Admin\MarchController@modify_people');
     Route::get('/change_page','Admin\MarchController@change_page');
     Route::post('/search','Admin\MarchController@search_people');
-
 
     Route::get('/train/people','Admin\TrainController@get_people');
     Route::post('/del/{NO}','Admin\TrainController@del_people');
@@ -61,24 +59,38 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'lecture'],function () {
 
     Route::get('/getlecture','LectureController@get_all_lecture');
-
     Route::get('/getlecturecount','LectureController@get_count_lecture');
     Route::get('/getlectuesort','LectureController@get_lecture_sort');
-
     Route::post('/alterlecture','LectureController@set_lec_message');
-
     Route::get('/delete','LectureController@delete_lecture');
-
     Route::get('/getusers','LectureController@get_lecture_user');
-
     Route::post('/newlecture','LectureController@new_lecture');
 
+});
+
+
+Route::group(['prefix' => 'News'],function (){
+    Route::get('/getNewItem','Admin\News\NewController@getNewItem');
+    Route::post('/delete','Admin\News\NewController@deleteNews');
+    Route::post('/add','Admin\News\NewController@insertNews');
+    Route::get('/getOneNew','Admin\News\NewController@getOneNew');
+    Route::post('/update','Admin\News\NewController@updateNew');
+});
+
+Route::group(['prefix'=> 'Contact'],function(){
+    Route::get('/getContent','Admin\Contact\ContactController@getContent');
+    Route::post('/updateContent','Admin\Contact\ContactController@updateContent');
+});
+Route::group(['prefix'=> 'Road'],function(){
+    Route::get('/getRoad','Admin\Road\roadController@getRoad');
+    Route::post('/updateRoad','Admin\Road\roadController@updateRoad');
 });
 
 Route::group(['prefix' => 'userinfo'],function () {
     Route::get('/getuserdata','userInfoController@select_finish_user');
     Route::get('/getusernum','userInfoController@select_user_number');
-
     Route::post('/updateuser','userInfoController@update_user_mesg');
     Route::post('/deleteusers','userInfoController@delete_users_info');
+    Route::post('/adduser','userInfoController@new_user_msg');
 });
+

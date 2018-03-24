@@ -76,15 +76,19 @@
 			    <el-form-item label="关键字" width="200"> 
 			     	<el-input :value='type' v-model="type2"></el-input>
 			    </el-form-item>
-			    <el-row :gutter="24" >
+			    <el-row :gutter="20">
 					<el-col :span="12">
-					 	<div class="grid-content bg-purple">
-				        	<div id="editorElem" style="text-align: left;"></div>
-					  	</div>
+						<div style="text-align:center;margin-bottom: 10px;">
+							 <el-button>题目</el-button>
+						</div>
+					 		<UE ref="ue"></UE>
 					</el-col>
 					<el-col :span="12">
 					  	<div class="grid-content bg-purple-light">
-				    		<div id="editorElem2" style="text-align: left;"></div>
+					  		<div style="text-align:center;margin-bottom: 10px;">
+							 <el-button>答案</el-button>
+						</div>
+					  		<UE ref="ue2"></UE>
 					  	</div>
 					</el-col>
 				</el-row>
@@ -95,23 +99,26 @@
 </template>
 
  <script>
-	import E from 'wangeditor'
+	import UE from '../../../utf8-php/UEditor.vue'
     export default {
+    	 components:{
+	        UE
+	     },
 	    data() {
 		    return {
-		      tableData: [],
+		      tableData: [],	//记录
 		      dialogVisible:false,
-		      b_editor:false,
+		      b_editor:false,	//每次打开遮罩层只创建一次编辑器
 		      title:"",
-		      title2:"",
-		      type:"",
-		      type2:"",
-		      content:"",
-		      answer:"",
-		      currentId:0,
+		      title2:"",		//标题备份（用于比较是否改变）
+		      type:"",			
+		      type2:"",			//类型备份
+		      content:"",		//题目备份
+		      answer:"",		//代码备份
+		      currentId:0,		//当前id
 		      currentPage1: 1,
-		      pagesNumber:10,
-		      recorNumber:0
+		      pagesNumber:10,	//每页显示记录数
+		      recorNumber:0		//总记录数
 		    }
 		},
 	    methods: {
@@ -130,29 +137,25 @@
 		    		axios.post('/admin/weeklyExercise/delete/'+val)			
 					.then(function(response){
 						alert(response.data.msg);
-						// window.location.reload();
+						window.location.reload();
 					});
 				}
 	    	},
 	    	onlyCreatEditor:function(id){
-	    		this.dialogVisible = true;
-	    		if(!this.b_editor){
-	    			this.editor=this.createeditor('#editorElem');
-	    			this.editor2=this.createeditor('#editorElem2');
-	    			this.b_editor=true;
-	    		}
+	    		this.dialogVisible = true;	//显示遮罩层
 	    		this.currentId=id;
 	    		this.setEditorData(id);
 	    	},
+
 	    	setThenData:function(result){
 	    		this.title=result[0].title;
 	    		this.title2=result[0].title;
 	    		this.type=result[0].type;
 	    		this.type2=result[0].type;
-    			this.editor.txt.text(result[0].content);
-	    		this.content=this.editor.txt.text();
-    			this.editor2.cmd.do('insertHTML','<pre><code>'+ result[0].answer +'</code><pre>');
-    			this.answer=this.editor2.txt.text();
+	    		this.$refs.ue.setUEContent(result[0].content);
+	    		this.content=result[0].content;
+	    		this.$refs.ue2.setUEContent(result[0].answer);
+	    		this.answer=result[0].answer;
  	    	},
 
 	    	setEditorData:function(id){
@@ -171,64 +174,38 @@
 						// window.location.reload();
 					});
 	    	},
-	    	createeditor:function(divname){
-	    		var self=this;
-	    		this.dialogVisible = true;
-	    		var editor = new E(divname);
-		        editor.customConfig.onchange = (html) => {
-		          this.subject = html
-		        };
-	         	editor.customConfig.menus = [
-		       		'head',  // 标题
-				    'bold',  // 粗体
-				    'italic',  // 斜体
-				    'underline',  // 下划线
-				    'strikeThrough',  // 删除线
-				    'foreColor',  // 文字颜色
-				    'backColor',  // 背景颜色
-				    'link',  // 插入链接
-				    'list',  // 列表
-				    'justify',  // 对齐方式
-				    'quote',  // 引用
-				    'emoticon',  // 表情
-				    'image',  // 插入图片
-				    'table',  // 表格
-				    'code',  // 插入代码
-			    ]
-		    	editor.create();
-		    	return editor;
-	    	},
 	      	handleClose(done) {
-	      		if (this.title!=this.title2||this.type!=this.type2||this.content!=this.editor.txt.text()||this.answer!=this.editor2.txt.text()) {
+	      		console.log("关闭遮罩层");
+	      		if (this.title!=this.title2||this.type!=this.type2||this.content!=this.$refs.ue.getUEContent()||this.answer!=this.$refs.ue2.getUEContent()) {
+	      			console.log(this.answer!=this.$refs.ue2.getUEContent());
 	      			this.updateAlgorithm();
 	      		}
-	      		this.editor2.txt.clear();
 	            done();
 	      	},
 	      	updateAlgorithm:function(){
 	      		if(confirm("你修改了内容，确定要更改吗？")){
-	      			if(this.type2=="")
-			            this.type2="无";
 		          	if(this.title=="")
 			            alert("标题不能为空");
-		          	else if(this.editor.txt.text()=="")
+		          	else if(this.$refs.ue.getUEContent()=="")
 		            	alert("题目不能为的空");
-		          	else if(this.editor2.txt.text()=="")
+		          	else if(this.$refs.ue2.getUEContent()=="")
 			            alert("答案代码不能为空");
 		          	else{
+		      			if(this.type2=="")
+			            	this.type2="无";
   			    		axios.post('/admin/weeklyExercise/update',{
 			    			id:this.currentId,
 	    		        	title:this.title2,
 	        				keyword:this.type2,
-	        				subject:this.editor.txt.text(),
-	        				answer:this.editor2.txt.text()
+	        				subject:this.$refs.ue.getUEContent(),
+	        				answer:this.$refs.ue2.getUEContent()
 	    				})
 						.then(function(response){
 							alert(response.data.msg);
 						});
 		          	}
 				}else{
-					console.log("no");
+					alert("终止了修改");
 				}
 	      	},
 	      	handleCurrentChange(val) {
