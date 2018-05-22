@@ -1,5 +1,5 @@
 <template>
-
+   
     <div v-loading="loading" style="width: 100%; padding-top: 30px;">
         标题:
         <div style="width: 30%;display: inline-block;margin-bottom: 5px;">
